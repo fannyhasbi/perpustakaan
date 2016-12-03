@@ -28,10 +28,7 @@ Pengunjung bisa mendaftarkan dirinya sendiri melalui halaman ini, dengan catatan
 ### pinjam.php
 Terdapat 2 tabel, yaitu:
 * Buku yang belum dikembalikan
-Berisi daftar nama anggota beserta buku yang belum dikembalikannya.
-
 * Buku yang sudah dikembalikan
-Berisi daftar nama anggota dan buku yang sudah dikembalikan beserta tanggal pengembaliannya.
 
 ### proses_pinjam.php
 Pada halaman ini, anggota bisa meminjam buku yang dipilihnya. Halaman ini hanya bisa diakses melalui halaman buku.php.
