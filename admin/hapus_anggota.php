@@ -6,9 +6,10 @@
 </head>
 <body>
 <ul>
-	<li><a href="../index.php">Home</a></li>
-	<li><a href="../anggota.php">Anggota</a></li>
-	<li><a href="../buku.php">Buku</a></li>
+	<li><a href="index.php">Home</a></li>
+	<li><a href="hapus_buku.php">Hapus Buku</a></li>
+	<li><a href="hapus_anggota.php">Hapus Anggota</a></li>
+	<li><a href="input_buku.php">Tambah Buku</a></li>
 </ul>
 
 <?php
