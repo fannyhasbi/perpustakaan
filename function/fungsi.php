@@ -38,7 +38,7 @@ function anggota_ada($nim){
 	$hasil = mysqli_query($koneksi, $query);
 
 	if($row = mysqli_num_rows($hasil) == 0){
-		return false;
+		return false; //jika akun tidak ditemukan
 	} else {
 		return true;
 	}
