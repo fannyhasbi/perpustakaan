@@ -38,7 +38,7 @@ function anggota_ada($nim){
 	$hasil = mysqli_query($koneksi, $query);
 
 	if($row = mysqli_num_rows($hasil) == 0){
-		return false; //jika akun tidak ditemukan
+		return false;
 	} else {
 		return true;
 	}
@@ -69,79 +69,11 @@ function pinjam_login(){ //berguna di halaman buku.php
 		echo "login.php";
 	}
 }
-function daftar_buku($judul,$pengarang,$jenis,$penerbit,$jumlah,$konten){
-	global $koneksi;
-	$judul		= mysqli_real_escape_string($koneksi, $judul);
-	$pengarang	= mysqli_real_escape_string($koneksi, $pengarang);
-	$jenis		= mysqli_real_escape_string($koneksi, $jenis);
-	$penerbit	= mysqli_real_escape_string($koneksi, $penerbit);
-	$jumlah		= mysqli_real_escape_string($koneksi, $jumlah);
-	$konten		= mysqli_real_escape_string($koneksi, $konten);
-
-	$query = "INSERT INTO buku (judul,pengarang,jenis_buku,penerbit,jumlah,konten) VALUES ('$judul', '$pengarang', '$jenis', '$penerbit', $jumlah, '$konten')";
-	if(mysqli_query($koneksi, $query)){
-		return true;
-	} else {
-		return false;
-	}
-}
-
-function tambah_buku($judul,$jumlah){
-	global $koneksi;
-	$judul	= mysqli_real_escape_string($koneksi, $judul);
-	$jumlah = mysqli_real_escape_string($koneksi, $jumlah);
-
-	$query = "UPDATE buku SET jumlah = jumlah + $jumlah WHERE judul = '$judul'";
-	if(mysqli_query($koneksi, $query)){
-		return true;
-	} else {
-		return false;
-	}
-}
-
-function buku_sama($judul){
-	global $koneksi;
-	$judul = mysqli_real_escape_string($koneksi, $judul);
-
-	$query = "SELECT judul FROM buku WHERE judul = '$judul'";
-	$hasil = mysqli_query($koneksi, $query);
-
-	if(mysqli_num_rows($hasil) == 0){
-		return true;
-	} else {
-		return false;
-	}
-}
 
 function hapus_anggota($nim){
 	global $koneksi;
 	$nim = mysqli_real_escape_string($koneksi, $nim);
 	$query= "DELETE FROM anggota WHERE nim = '$nim'";
-
-	if(mysqli_query($koneksi, $query)){
-		return true;
-	} else {
-		return false;
-	}
-}
-
-function hapus_buku($judul){
-	global $koneksi;
-	$judul = mysqli_real_escape_string($koneksi, $judul);
-	$query = "DELETE FROM buku WHERE judul = '$judul'";
-
-	if(mysqli_query($koneksi, $query)){
-		return true;
-	} else {
-		return false;
-	}
-}
-
-function kurangi_buku($judul,$jumlah){
-	global $koneksi;
-	$judul = mysqli_real_escape_string($koneksi, $judul);
-	$jumlah= mysqli_real_escape_string($koneksi, $jumlah);
-	$query = "UPDATE buku SET jumlah = jumlah - $jumlah WHERE judul = '$judul'";
 
 	if(mysqli_query($koneksi, $query)){
 		return true;
