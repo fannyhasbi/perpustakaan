@@ -1,6 +1,10 @@
 <?php
 session_start();
-require_once "core/init.php";
+//require_once "core/init.php"; <- tidak digunakan agar tidak konflik
+//diganti dengan require_once setiap file di folder function/
+require_once "function/db.php";
+require_once "function/fungsi.php";
+
 if(!isset($_SESSION['login'])){
 ?>
 <!DOCTYPE html>
@@ -8,84 +12,91 @@ if(!isset($_SESSION['login'])){
 <head>
 	<title>Login Anggota</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="view/main.css"/>
+	<style type="text/css">
+		body, html {
+			height: 100%;
+		}
+		body {
+			background-color: #0090bd;
+		}
+		#formulir {
+			max-width: 350px;
+			margin: 5% auto 25px;
+			background-color: #FAFAFA;
+			padding: 40px;
+			border-radius: 10px 10px 2px 2px;
+		}
+		.img {
+			margin: 5px auto 20px;
+		}
+		img {
+			max-width: 150px;
+			max-height: 150px;
+		}
+		.form-control,
+		label {
+			margin-bottom: 10px;
+			width: 100%;
+		}
+		.warning {
+			margin: 10px auto;
+			padding: 10px;
+			color: #FF2800;
+		}
+	</style>
 
 	<script src="bootstrap/jquery.min.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<nav class="navbar navbar-fixed-top navbar-inverse">
-	<div class="container">
-		<div class="navbar-header">
-			<a href="index.php" class="navbar-brand">PERPUS ONLINE</a>
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigasi">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
+<div class="container">
+	<div id="formulir">
+		<div class="img text-center">
+			<img src="https://cdn2.iconfinder.com/data/icons/users-2/512/User_6-512.png" class="img-circle"/>
 		</div>
-		<div class="collapse navbar-collapse" id="navigasi">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="anggota.php">ANGGOTA</a></li>
-				<li><a href="buku.php">BUKU</a></li>
-				<li><a href="pinjam.php">PINJAM</a></li>
-				<?php
-				if(isset($_SESSION['login'])){
-					echo "<li><a href='logout.php'>LOGOUT</a></li>";
-				} else echo "<li><a href='login.php'>LOGIN</a></li>";
-				?>
-			</ul>
+		<form action="login.php" method="POST">
+			<input type="text" class="form-control" placeholder="Nama Depan" name="nama" required autofocus>
+			<input type="text" class="form-control" placeholder="NIM" name="nim" required>
+			<input type="submit" class="btn btn-lg btn-primary btn-block" name="submit" value="LOGIN">
+		</form>
+		<div class="warning">
+			<?php
+			if(isset($_POST['submit'])){
+				$nama = strtolower($_POST['nama']);
+				$nim  = $_POST['nim'];
+				$cek = new Anggota;
+
+				if(!empty($_POST)){
+					if($_POST['nama']){
+						if($_POST['nim']){
+							if($cek->nama_ada($nama)){
+								if($cek->nim_ada($nim)){
+									if($cek->cek_status($nama,$nim)){
+										$cek->login($nama,$nim);
+									} else echo "Maaf, akun dengan NIM $nim sudah dinonaktifkan.";
+								} else echo "Maaf, nim $nim tidak terdaftar.";
+							} else echo "Maaf, nama $nama tidak terdaftar.";
+						} else echo "NIM tidak boleh kosong.";
+					} else echo "Nama tidak boleh kosong.";
+				} else echo "Harap isi semua data dengan benar.";
+			}
+			?>
+		</div>
+		<br>
+		<div class="row text-center">
+			<div class="col-sm-6">
+				<a href="index.php">Home</a>
+			</div>
+			<div class="col-sm-6">
+				<a href="daftar.php">Daftar</a>
+			</div>
 		</div>
 	</div>
-</nav>
-
-<div class="container-fluid">
-	<h2 class="text-center margin-md">Login Anggota</h2>
-	<form class="form-horizontal" action="login.php" method="POST" style="margin-right:100px;">
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="nama">Nama depan: </label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" name="nama">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-sm-2" for="nim">NIM: </label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" name="nim">
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<input type="submit" class="btn btn-primary" name="submit" value="LOGIN">
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<?php
-				if(isset($_POST['submit'])){
-					$nama = strtolower($_POST['nama']);
-					$nim  = $_POST['nim'];
-
-					if(!empty($_POST)){
-						if($_POST['nama']){
-							if($_POST['nim']){
-								if(anggota_ada($nim)){
-									login($nama,$nim);
-								} else echo "<div class='alert alert-warning'>NIM:".$_POST['nim']." tidak terdaftar.";
-							} else echo "<div class='alert alert-warning'>NIM tidak boleh kosong.</div>";
-						} else echo "<div class='alert alert-warning'>Nama tidak boleh kosong.</div>";
-					} else echo "<div class='alert alert-danger'>Harap isi semua data dengan benar.</div>";
-				}
-				?>
-			</div>
-		</div>
-	</form>
 </div>
 
 <script>
 $(document).ready(function(){
-	$("div.alert").fadeOut(7000);
+	$("#formulir").hide().fadeIn(2000);
 });
 </script>
 </body>

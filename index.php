@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,43 +12,44 @@
 </head>
 <body>
 
-<nav class="navbar navbar-fixed-top navbar-inverse">
-	<div class="container">
-		<div class="navbar-header">
-			<a href="index.php" class="navbar-brand">PERPUS ONLINE</a>
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigasi">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-		</div>
-		<div class="collapse navbar-collapse" id="navigasi">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="anggota.php">ANGGOTA</a></li>
-				<li><a href="buku.php">BUKU</a></li>
-				<li><a href="pinjam.php">PINJAM</a></li>
-			</ul>
-		</div>
-	</div>
-</nav>
+<?php include "view/nav.php";?>
 
-<header id="header">
+<header id="header" class="index">
 	<div class="vertical-center">
-		<h1>Selamat Datang di Aplikasi Perpustakaan</h1>
-		<h3>Created by Fanny Hasbi</h3>
-		<br><br><br>
+		<?php
+		if(isset($_SESSION['login'])){
+		?>
+
+		<h1>Selamat datang, <?php echo $_SESSION['nama']; ?></h1>
+
+		<?php
+		} else {
+		?>
+
 		<div class="row">
-			<div class="col-sm-6">
-				<a href="login.php">
-					<div class="btn btn-default vertical-center">LOGIN</div>
-				</a>
+			<div class="col-md-6">
+				<h1>PERPUSTAKAAN<br>ONLINE</h1>
+				<h4>Kemudahan dalam peminjaman buku secara online.</h4>
+				<br>
+				<div class="row">
+					<div class="col-md-6">
+						<a href="buku.php">
+							<div class="btn btn-index vertical-center text-center">BUKU</div>
+						</a>
+					</div>
+					<div class="col-md-6">
+						<a href="login.php">
+							<div class="btn btn-index vertical-center text-center">LOGIN</div>
+						</a>
+					</div>
+				</div>
 			</div>
-			<div class="col-sm-6">
-				<a href="daftar.php">
-					<div class="btn btn-default vertical-center">DAFTAR</div>
-				</a>
-			</div>
+			<div class="col-md-6"></div>
 		</div>
+
+		<?php
+		}
+		?>
 	</div>
 </header>
 
