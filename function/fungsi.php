@@ -89,6 +89,8 @@ class Anggota {
 		$s = mysqli_fetch_assoc($hasil);
 		if($nama == strtolower($s['n_depan']) && $nim == $s['nim']){
 			$_SESSION['login'] = true;
+			$_SESSION['n_depan'] = $s['n_depan'];
+			$_SESSION['n_belakang'] = $s['n_belakang'];
 			$_SESSION['nama'] = $s['n_depan']." ".$s['n_belakang'];
 			$_SESSION['id_anggota'] = $s['id_anggota'];
 			header("Location: buku.php");
