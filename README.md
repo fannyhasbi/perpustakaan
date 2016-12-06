@@ -1,42 +1,39 @@
 # Perpustakaan
-Aplikasi ini adalah aplikasi berbasis web yang dibuat dengan bahasa HTML, CSS, PHP dan MySQL. Aplikasi Perpustakaan ini dibuat untuk mempermudah pencatatan peminjaman buku, sehingga mengurangi kemungkinan kesalahan rekap data.
+Aplikasi ini adalah aplikasi berbasis web yang dibuat dengan bahasa HTML, CSS, PHP, MySQL dan menggunakan framework [Bootstrap](http://getbootstrap.com/ "Get Bootstrap"). Aplikasi Perpustakaan ini dibuat untuk mempermudah pencatatan peminjaman buku, sehingga mengurangi kemungkinan kesalahan rekap data.
 
 ## Goal
 * Mempermudah pencatatan peminjaman buku
 * Menampilkan koleksi buku di perpustakaan
 
 ## Pages
-Terdapat 6 halaman utama, yaitu:
+Terdapat 3 halaman utama, yaitu:
 * anggota.php
 * buku.php
-* input_anggota.php
 * pinjam.php
-* proses_pinjam.php
-* admin
 
 ### anggota.php
-Menampilkan semua anggota perpustakaan yang sudah terdaftar dan yang nantinya menjadi syarat utama untuk bisa meminjam buku.
-Di dalam anggota.php juga bisa mendaftarkan anggota baru yang akan merujuk ke halaman input_anggota.php.
+Menampilkan semua anggota perpustakaan yang sudah terdaftar dan yang nantinya menjadi syarat utama untuk bisa meminjam buku. Semua data di halaman ini adalah user atau pengunjung yang sudah mendaftarkan diri menjadi anggota dan mempunyai akun masing-masing untuk login.
 
 ### buku.php
 Menampilkan semua buku yang terdapat di perpustakaan saat ini.
 Di halaman ini, anggota bisa melihat sinopsis setiap buku yang ada. Anggota juga bisa langsung melakukan peminjaman buku pada halaman ini.
 
-### input_anggota.php
-Pengunjung bisa mendaftarkan dirinya sendiri melalui halaman ini, dengan catatan dia mempunyai NIM.
-
 ### pinjam.php
-Terdapat 2 tabel, yaitu:
+Terdapat 2 tabel data, yaitu:
 * Buku yang belum dikembalikan
 * Buku yang sudah dikembalikan
 
-### proses_pinjam.php
-Pada halaman ini, anggota bisa meminjam buku yang dipilihnya. Halaman ini hanya bisa diakses melalui halaman buku.php.
+## Admin
+Admin diberikan beberapa hak khusus yang tidak bisa dilakukan oleh user biasa, yaitu
 
-### admin
-Admin bisa melakukan berbagai macam hal, yaitu:
-* Hapus anggota
-* Hapus buku
-* Tambah Buku
+### Menonaktifkan User
+User yang dinonaktifkan tidak akan bisa login dan meminjam buku. Admin juga bisa mengaktifkan user di halaman yang sama, yaitu `./admin/anggota.php`
 
-Aplikasi Perpustakaan ini dibuat dengan tampilan yang sederhana dan keamanan yang lemah. Aplikasi ini dibuat untuk tujuan pembelajaran.
+### Menambah Buku
+Menambahkan buku kemudian membuat halaman sinposis buku yang baru didaftarkan ke `./buku/` dan bisa dilihat oleh semua pengunjung.
+
+### Menghapus buku
+Menghapus dan mengurangi jumlah buku bisa dilakukan di halaman `./admin/hapus_buku.php`
+
+> Aplikasi ini masih belum menggunakan Object Oriented Programming (OOP) sepenuhnya
+> sehingga masih belum efektif dalam menggunakan beberapa fungsi.
