@@ -23,10 +23,17 @@ body {
 	z-index: 99;
 	background-color: #0090bd;
 }
-.navbar .navbar-header a, .navbar .collapse li a {
+.navbar .navbar-header a,
+.navbar .collapse li a {
 	font-weight: 600;
 	color: white;
 	letter-spacing: 1.8px;
+}
+.navbar-nav .dropdown li a {
+	font-size: 12px;
+	font-weight: 200;
+	color: #000;
+	letter-spacing: 1px;
 }
 #header {
 	display: table;
@@ -36,6 +43,9 @@ body {
 	background-color: #0090bd;
 	padding: 200px;
 	text-align: left;
+}
+#header h1 {
+	font-size: 54px;
 }
 #header .vertical-center div.btn{
 	height: 60px;
@@ -47,7 +57,7 @@ body {
 	border: none;
 }
 #header.index {
-	background-image: url(http://www.pixelstalk.net/wp-content/uploads/2016/06/Download-Desktop-Book-HD-Backgrounds.jpg);
+	background-image: url(http://bsnscb.com/data/out/25/27294595-books-wallpapers.jpg);
 	background-size: cover;
 }
 .btn-index {
