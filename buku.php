@@ -13,6 +13,7 @@ require_once "function/fungsi.php";
 
 	<script src="bootstrap/jquery.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="ajax/ajax.js"></script>
 </head>
 <body>
 
@@ -20,10 +21,15 @@ require_once "function/fungsi.php";
 
 <div class="container-fluid">
 	
-	<form action="buku.php" method="GET" class="form-inline" style="float:left">
+	<div class="form-inline" style="float:left;">
+		<input type="text" class="form-control" name="title" placeholder="Cari buku" id="judul">
+		<input type="submit" class="btn btn-primary" value="Cari" onclick="judul()">
+	</div>
+
+	<div class="form-inline" style="float:right;">
 		<div class="form-group">
 			<label class="control-label" for="jenis">Jenis: </label>
-			<select name="jenis" class="form-control">
+			<select name="jenis" class="form-control" onchange="jenis(this.value)">
 				<option value="all">Semua</option>
 				<?php
 				$q = "SELECT DISTINCT jenis_buku FROM buku";
@@ -36,12 +42,7 @@ require_once "function/fungsi.php";
 				?>
 			</select>
 		</div>
-		<input type="submit" class="btn btn-primary" value="Filter">
-	</form>
-	<form action="buku.php" method="POST" class="form-inline" style="float: right">
-		<input type="text" class="form-control" name="title" placeholder="Cari buku">
-		<input type="submit" class="btn btn-primary" value="Cari">
-	</form>
+	</div>
 	
 	<br><br><br>
 
@@ -56,23 +57,9 @@ require_once "function/fungsi.php";
 				<th>Penerbit</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="tabel">
 			<?php
-			if(isset($_GET['jenis'])){
-				$jenis = $_GET['jenis'];
-				$query = "SELECT * FROM buku WHERE jenis_buku = '$jenis'";
-				if($_GET['jenis'] == "all"){
-					$query = "SELECT * FROM buku";
-				}
-			} else {
-				$query = "SELECT * FROM buku";
-			}
-
-			if(isset($_POST['title'])){
-				$term = $_POST['title']; //teks yang dicari
-				$query = "SELECT * FROM buku WHERE judul LIKE '%$term%'";
-			}
-
+			$query = "SELECT * FROM buku ORDER BY judul ASC";
 			$hasil = mysqli_query($koneksi, $query);
 			$no = 1;
 
@@ -82,19 +69,7 @@ require_once "function/fungsi.php";
 			<tr <?php if($row['jumlah'] <= 0){echo "class='danger'";}  ?>>
 				<td><?php echo $no; ?></td>
 				<td><?php echo $row['id_buku']; ?></td>
-				<td>
-					<a href="<?php echo $file; ?>">
-						<?php
-						if(isset($_POST['title'])){
-							//kata yang dicari diubah menjadi bold
-							echo str_ireplace($term, "<b>".$term."</b>", $row['judul']);
-						} else {
-							//jika tidak ada input search, maka echo biasa
-							echo $row['judul'];
-						}
-						?>
-					</a>
-				</td>
+				<td><a href="<?php echo $file; ?>"><?php echo $row['judul'];?></a></td>
 				<td><?php echo $row['pengarang']; ?></td>
 				<td><?php echo $row['jenis_buku']; ?></td>
 				<td><?php echo $row['penerbit']; ?></td>
