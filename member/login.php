@@ -28,10 +28,10 @@ if(isset($_POST['login-member']) && isset($_POST['username']) && isset($_POST['p
     die("Username atau password salah");
 
   $_SESSION['login_member'] = true;
-  $_SESSION['id_anggota']   = $row['id'];
+  $_SESSION['id_anggota']   = (int) $row['id'];
   $_SESSION['username']     = $row['username'];
   $_SESSION['nama']         = $row['nama'];
-  $_SESSION['status']       = $row['status'];
+  $_SESSION['status']       = (int) $row['status'];
   $_SESSION['alamat']       = $row['alamat'];
 
   header("Location: ../buku/index.php");

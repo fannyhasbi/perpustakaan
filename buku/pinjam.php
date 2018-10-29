@@ -1,12 +1,13 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['login_member']))
+  header("Location: ../member/login.php");
+
 if(!isset($_GET['id']))
   header("Location: ./index.php");
 
 require_once __DIR__."/../core/autoload.php";
-
-if(isset($_GET['confirm'])){
-
-}
 
 $query  = "SELECT * FROM buku WHERE id = ". $_GET['id'];
 $result = mysqli_query($connect, $query);
@@ -16,6 +17,18 @@ if($result->num_rows == 0)
   header("Location: ./index.php");
 
 $data = mysqli_fetch_assoc($result);
+
+if(isset($_GET['confirm'])){
+  if($_GET['confirm'] == 'yes'){
+    if(!isset($_SESSION['login_member']))
+      header("Location: ../member/login.php");
+
+    $query = "INSERT INTO pinjam (id_anggota, id_buku) VALUES (". $_SESSION['id_anggota'] .", ". $data['id'] .")";
+    $result = mysqli_query($connect, $query) OR die(mysql_error());
+
+    header("Location: ./index.php");
+  }
+}
 
 ?>
 <!DOCTYPE html>
@@ -30,7 +43,7 @@ $data = mysqli_fetch_assoc($result);
   <h1>Konfirmasi Pinjam Buku</h1>
   
   <div>
-    <p>Berikut adalah data buku yang ingin Anda pinjam :</p>
+    <p>Pastikan data dibawah ini benar sebelum Anda meminjam</p>
     <table>
     <table cellpadding="5">
       <tr>
