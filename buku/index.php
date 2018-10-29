@@ -29,7 +29,11 @@
     <tbody>
       <?php while($row = mysqli_fetch_assoc($result)){ ?>
         <tr>
-          <td><?= $row['judul']; ?></td>
+          <td>
+            <a href="<?= './detail.php?id='. $row['id'] ?>">
+              <?= $row['judul']; ?>
+            </a>
+          </td>
           <td><?= $row['pengarang']; ?></td>
           <td><?= $row['tahun']; ?></td>
           <td><?= $row['penerbit']; ?></td>
