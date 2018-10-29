@@ -8,5 +8,8 @@
 </head>
 <body>
   <h1>Perpustakaan Online</h1>
+  <p>Perpustakaan Online, Memudahkan Anda Eksplorasi Dunia.</p>
+
+  <a href="./buku/index.php">Lihat Buku</a>
 </body>
 </html>
