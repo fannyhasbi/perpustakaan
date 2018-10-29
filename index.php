@@ -10,6 +10,9 @@
   <h1>Perpustakaan Online</h1>
   <p>Perpustakaan Online, Memudahkan Anda Eksplorasi Dunia.</p>
 
-  <a href="./buku/index.php">Lihat Buku</a>
+  <ul>
+    <li><a href="./buku/index.php">Lihat Buku</a></li>
+    <li><a href="./member/login.php">Login Member</a></li>
+  </ul>
 </body>
 </html>
