@@ -11,7 +11,7 @@
   <p>Silahkan pilih buku untuk dipinjam.</p>
 
   <?php
-  require_once __DIR__."/core/autoload.php";
+  require_once __DIR__."/../core/autoload.php";
   $query = "SELECT * FROM buku";
   $result= mysqli_query($connect, $query) OR die(mysql_error());
   ?>
