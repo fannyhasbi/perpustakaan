@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__."/../core/autoload.php";
-
 // Jika tidak diakses lewat link URL yang memiliki id
 if(!isset($_GET['id']))
   header("Location: ./index.php");
+
+require_once __DIR__."/../core/autoload.php";
 
 $query  = "SELECT * FROM buku WHERE id = ". $_GET['id'];
 $result = mysqli_query($connect, $query);

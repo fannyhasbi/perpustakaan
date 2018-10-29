@@ -1,3 +1,23 @@
+<?php
+if(!isset($_GET['id']))
+  header("Location: ./index.php");
+
+require_once __DIR__."/../core/autoload.php";
+
+if(isset($_GET['confirm'])){
+
+}
+
+$query  = "SELECT * FROM buku WHERE id = ". $_GET['id'];
+$result = mysqli_query($connect, $query);
+
+// Jika tidak ada data
+if($result->num_rows == 0)
+  header("Location: ./index.php");
+
+$data = mysqli_fetch_assoc($result);
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,29 +35,31 @@
     <table cellpadding="5">
       <tr>
         <th>Judul buku</th>
-        <td>Ini Dia</td>
+        <td><?= $data['judul']; ?></td>
       </tr>
       <tr>
         <th>Pengarang</th>
-        <td>Fanny Hasbi</td>
+        <td><?= $data['pengarang']; ?></td>
       </tr>
       <tr>
         <th>Tahun terbit</th>
-        <td>2006</td>
+        <td><?= $data['tahun']; ?></td>
       </tr>
       <tr>
         <th>Penerbit</th>
-        <td>Gramedia</td>
+        <td><?= $data['penerbit']; ?></td>
       </tr>
       <tr>
         <th>Kategori</th>
-        <td>Novel</td>
+        <td><?= $data['kategori'] != NULL ? $data['kategori'] : 'Tidak ada' ?></td>
       </tr>
     </table>
 
     <br>
 
-    <a href="?confirm=yes">Lanjutkan</a>
+    <a href="<?= './pinjam.php?id='. $data['id'] .'&confirm=yes'; ?>">Lanjutkan</a>
+    <br>
+    <a href="javascript:window.history.back();">Batalkan</a>
   </div>
 </body>
 </html>
