@@ -1,5 +1,9 @@
 <?php
-// Jika tidak diakses lewat link URL yang memiliki id
+session_start();
+
+if(!isset($_SESSION['login_member']))
+  header("Location: ../member/login.php");
+
 if(!isset($_GET['id']))
   header("Location: ./index.php");
 
@@ -13,24 +17,39 @@ if($result->num_rows == 0)
   header("Location: ./index.php");
 
 $data = mysqli_fetch_assoc($result);
-?>
 
+if(isset($_GET['confirm'])){
+  if($_GET['confirm'] == 'yes'){
+    if(!isset($_SESSION['login_member']))
+      header("Location: ../member/login.php");
+
+    $query = "INSERT INTO pinjam (id_anggota, id_buku) VALUES (". $_SESSION['id_anggota'] .", ". $data['id'] .")";
+    $result = mysqli_query($connect, $query) OR die(mysql_error());
+
+    header("Location: ./index.php");
+  }
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?= $data['judul']; ?> | Perpustakaan</title>
+  <title>Konfirmasi Pinjam | Perpustakaan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <h1>Detail Buku</h1>
-  <p>Berikut adalah detail buku yang Anda inginkan</p>
+  <h1>Konfirmasi Pinjam Buku</h1>
   
   <div>
-    <h3><?= $data['judul']; ?></h3>
-
+    <p>Pastikan data dibawah ini benar sebelum Anda meminjam</p>
+    <table>
     <table cellpadding="5">
+      <tr>
+        <th>Judul buku</th>
+        <td><?= $data['judul']; ?></td>
+      </tr>
       <tr>
         <th>Pengarang</th>
         <td><?= $data['pengarang']; ?></td>
@@ -48,12 +67,12 @@ $data = mysqli_fetch_assoc($result);
         <td><?= $data['kategori'] != NULL ? $data['kategori'] : 'Tidak ada' ?></td>
       </tr>
     </table>
-  </div>
 
-  <br>
+    <br>
 
-  <div>
-    <a href="<?= './pinjam.php?id='. $data['id'] ?>">Pinjam Buku</a>
+    <a href="<?= './pinjam.php?id='. $data['id'] .'&confirm=yes'; ?>">Lanjutkan</a>
+    <br>
+    <a href="javascript:window.history.back();">Batalkan</a>
   </div>
 </body>
 </html>
