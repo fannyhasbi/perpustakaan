@@ -27,6 +27,7 @@ if(isset($_POST['login-member']) && isset($_POST['username']) && isset($_POST['p
   if(!password_verify($password, $row['password']))
     die("Username atau password salah");
 
+  $_SESSION['login-member'] = true;
   $_SESSION['username'] = $row['username'];
   $_SESSION['nama']     = $row['nama'];
   $_SESSION['status']   = $row['status'];
