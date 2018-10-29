@@ -1,8 +1,9 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db	  = "perpustakaan";
+// Kredensial database yang diperlukan
 
-$koneksi = mysqli_connect($host,$user,$pass,$db) or die("Kesalahan Database");
-?>
+$host     = "localhost";
+$uname    = "root";
+$pass     = "";
+$database = "perpustakaan";
+
+$connect = mysqli_connect($host, $uname, $pass, $database) OR die(mysql_error());
