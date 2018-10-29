@@ -2,7 +2,7 @@
 session_start();
 
 // jika sudah login
-if(isset($_SESSION['login-member']))
+if(isset($_SESSION['login_member']))
   header('Location: ../buku/index.php');
 
 // jika klik tombol login
@@ -27,11 +27,12 @@ if(isset($_POST['login-member']) && isset($_POST['username']) && isset($_POST['p
   if(!password_verify($password, $row['password']))
     die("Username atau password salah");
 
-  $_SESSION['login-member'] = true;
-  $_SESSION['username'] = $row['username'];
-  $_SESSION['nama']     = $row['nama'];
-  $_SESSION['status']   = $row['status'];
-  $_SESSION['alamat']   = $row['alamat'];
+  $_SESSION['login_member'] = true;
+  $_SESSION['id_anggota']   = $row['id'];
+  $_SESSION['username']     = $row['username'];
+  $_SESSION['nama']         = $row['nama'];
+  $_SESSION['status']       = $row['status'];
+  $_SESSION['alamat']       = $row['alamat'];
 
   header("Location: ../buku/index.php");
 }
@@ -56,7 +57,7 @@ if(isset($_POST['login-member']) && isset($_POST['username']) && isset($_POST['p
       <br><br>
 
       <label for="password">Password</label><br>
-      <input type="password" name="password">
+      <input type="password" name="password" placeholder="password">
 
       <br><br>
 
