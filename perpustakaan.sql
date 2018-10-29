@@ -41,3 +41,13 @@ INSERT INTO anggota (username, password, nama, status, alamat) VALUES
 ('example', '$2y$10$eAkRJ8lPmvC.WSCF2t.6CeikVqD5cHxsN3g5fBzqFBSEVvAQ8sFLK', 'Example Member', 0, 'Semarang'),
 ('budi', '$2y$10$eAkRJ8lPmvC.WSCF2t.6CeikVqD5cHxsN3g5fBzqFBSEVvAQ8sFLK', 'Budi', 0, 'Salatiga'),
 ('alice', '$2y$10$eAkRJ8lPmvC.WSCF2t.6CeikVqD5cHxsN3g5fBzqFBSEVvAQ8sFLK', 'Alice ', 0, 'Jakarta');
+
+CREATE TABLE pinjam (
+  id INT NOT NULL AUTO_INCREMENT,
+  id_anggota INT NOT NULL,
+  id_buku INT NOT NULL,
+  tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  FOREIGN KEY (id_anggota) REFERENCES anggota(id),
+  FOREIGN KEY (id_buku) REFERENCES buku(id)
+);
