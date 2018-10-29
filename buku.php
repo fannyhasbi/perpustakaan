@@ -33,7 +33,7 @@
           <td><?= $row['pengarang']; ?></td>
           <td><?= $row['tahun']; ?></td>
           <td><?= $row['penerbit']; ?></td>
-          <td><?= $row['kategori']; ?></td>
+          <td><?= $row['kategori'] != NULL ? $row['kategori'] : 'Tidak ada'; ?></td>
         </tr>
       <?php } ?>
     </tbody>
