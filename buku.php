@@ -10,6 +10,12 @@
   <h1>Daftar Buku Perpustakaan</h1>
   <p>Silahkan pilih buku untuk dipinjam.</p>
 
+  <?php
+  require_once __DIR__."/core/autoload.php";
+  $query = "SELECT * FROM buku";
+  $result= mysqli_query($connect, $query) OR die(mysql_error());
+  ?>
+
   <table border="1" cellspacing="0" cellpadding="4">
     <thead>
       <tr>
@@ -21,7 +27,15 @@
       </tr>
     </thead>
     <tbody>
-      <!-- todo -->
+      <?php while($row = mysqli_fetch_assoc($result)){ ?>
+        <tr>
+          <td><?= $row['judul']; ?></td>
+          <td><?= $row['pengarang']; ?></td>
+          <td><?= $row['tahun']; ?></td>
+          <td><?= $row['penerbit']; ?></td>
+          <td><?= $row['kategori']; ?></td>
+        </tr>
+      <?php } ?>
     </tbody>
   </table>
 </body>
