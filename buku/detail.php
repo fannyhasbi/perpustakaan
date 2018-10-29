@@ -49,5 +49,11 @@ $data = mysqli_fetch_assoc($result);
       </tr>
     </table>
   </div>
+
+  <br>
+
+  <div>
+    <a href="<?= './pinjam.php?id='. $data['id'] ?>">Pinjam Buku</a>
+  </div>
 </body>
 </html>
