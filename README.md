@@ -4,7 +4,22 @@ Aplikasi perpustakaan online yang dibuat dengan bahasa PHP. Aplikasi Perpustakaa
 ## Entity Relationship Diagram
 ![ERD Perpustakaan](https://image.ibb.co/dEZdbV/erd-perpustakaan.png "ERD Perpustakaan Online")
 
+## Installation
+Just simply clone it into your workspace
+```
+git clone https://github.com/fannyhasbi/perpustakaan
+```
+
+Make a database called `perpustakaan` in MySQL or MariaDB and import the `perpustakaan.sql` file.
+
+If you want to use another name, just simply change the `$database` value in `/function/db.php` into your database name.
+
+## Information
+
 > Ini adalah versi terbaru
+>
 > Versi sebelumnya ada di branch master
+>
 > Namun file database sudah hilang
+>
 > Karena banyaknya orang yang membutuhkan repo ini maka dibuat versi terbaru
